@@ -17,7 +17,13 @@
 </section>
 
 <section id="readyContainer" class="container text-center">
-    <div class="col-xs-12 col-md-8- col-md-offset-2">
-        <button class="btn btn-warning ready" onclick="onReady(this)">Ready!</button>
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <form id="mainForm" action="javascript:" onSubmit="onReady()" class="text-left">
+            <div class='form-group'>
+                <label for="playerName">Enter your name:</label>
+                <input id="playerName" class="big-input form-control input-xlarge" type="text" required>
+            </div>
+            <input  id="readyBtn" type="submit" class="btn btn-warning ready" value="Ready!"></button>
+        </form>
     </div>
 </section>

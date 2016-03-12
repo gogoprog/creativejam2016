@@ -23,11 +23,21 @@ function submit()
     socket.emit('word', input);
 }
 
-function onReady( elem )
+function onReady()
 {
-    $(elem)
+    $("#readyBtn")
         .removeClass("btn-warning")
         .addClass("btn-success")
         .off();
-    socket.emit('ready');
+
+    var playerNameElement = $("#playerName");
+    if ( playerNameElement.length ) {
+        var playerName = playerNameElement.val();
+        socket.emit('ready', playerName);
+        playerNameElement.remove();
+        $("label[for=playerName]").remove();
+    } else {
+        socket.emit('ready');
+    }
+
 }
