@@ -1,14 +1,19 @@
 var socket = io();
 var mainForm = null;
 var readyContainer = null;
+var resultsContainer = null;
+var background = null;
 
 $( document ).ready(function() {
     mainForm = $("#mainForm");
     waitingForOtherPlayers = $("#waitingForOtherPlayers");
     readyContainer = $("#readyContainer");
+    resultsContainer = $("#results");
+    background = $("body");
 
     mainForm.hide();
     waitingForOtherPlayers.hide();
+    resultsContainer.hide();
 
     var name = document.location.search;
     name = name.match(/\?name=(.*)/);
@@ -20,6 +25,7 @@ $( document ).ready(function() {
 
     socket.on('start', function(word){
         mainForm.show();
+        $("input[type=text]", mainForm ).val("");
         readyContainer.hide();
     });
 
@@ -27,7 +33,22 @@ $( document ).ready(function() {
         console.log('result');
         console.log(result);
 
+        resultsContainer.show();
+        readyContainer.show();
+
+        $("#readyBtn")
+            .removeClass("btn-success")
+            .addClass("btn-warning")
+            .on("click", onReady );
+
         waitingForOtherPlayers.hide();
+        if ( result.hasOwnProperty("win") ) {
+            background.css("background-color", "green");
+        } else {
+            background.css("background-color", "red");
+        }
+
+        $("#score").text( result.score );
         // show results ( + win if you won ) and ready button. flow repeats.
     });
 });
@@ -57,5 +78,8 @@ function onReady()
     } else {
         socket.emit('ready');
     }
+
+    background.css("background-color", "transparent");
+
 
 }
