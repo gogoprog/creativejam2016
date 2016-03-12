@@ -1,8 +1,10 @@
+'use strict';
+
 var ParsedScore = null;
 
 function initialize()
 {
-    ParsedScore = JSON.parse("/common/score.json");
+    ParsedScore = JSON.parse('/common/score.json');
 }
 
 function calculateStringScore( string ) {

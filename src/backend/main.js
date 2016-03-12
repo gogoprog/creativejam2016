@@ -17,6 +17,7 @@ io.on('connection', function(socket) {
         }
 
         games[roomName].addPlayer(socket);
+        socket.emit('join', 'test');
     });
 });
 
@@ -27,5 +28,4 @@ app.use("/bootstrap/", express.static(__dirname + '/../../node_modules/bootstrap
 app.use("/common/", express.static(__dirname + '/../common/'));
 
 server.listen(process.env.PORT || 8000, function() {
-    logic.initialize();
 });
