@@ -10,8 +10,9 @@ fs.readFile(__dirname + '/words.json', 'utf8', function (err,data) {
 });
 
 let State = {
-    WAITING_FOR_PLAYERS:0,
-    WAITING_FOR_WORDS:1
+    WAITING_FOR_PLAYERS: 0,
+    WAITING_FOR_WORDS: 1,
+    SHOWDOWN: 2
 };
 
 class Game {
@@ -45,13 +46,18 @@ class Game {
         socket.on('word', function(data) {
             that.onWord(socket, data);
         });
+
+        socket.on('disconnect', function(){
+            this.players.splice(this.players.indexOf(socket), 1);
+            this.state = State.WAITING_FOR_PLAYERS;
+        });
     }
 
     start()
     {
         this.currentWord = words.en[0];
         this.playerWords = Array(this.players.length);
-        for(var p in this.players) this.players[p] = null;
+        for(var p in this.players) this.playerWords[p] = null;
         this.emit('start', this.currentWord);
         this.state = State.WAITING_FOR_WORDS;
     }
@@ -60,6 +66,20 @@ class Game {
     {
         console.log(word, 'from', socket.index);
         this.playerWords[socket.index] = word;
+
+        let completed = true;
+        for(var p in this.playerWords)
+        {
+            if(this.playerWords[p] === null)
+            {
+                completed = false;
+            }
+        }
+
+        if(completed)
+        {
+            this.state = State.SHOWDOWN;
+        }
     }
 }
 
