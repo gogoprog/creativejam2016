@@ -1,13 +1,23 @@
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-<script src="jquery/jquery.min.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/qrcode/qrcode.js"></script>
-<script src="js/createscreen.js"></script>
+<head>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/anicollection.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="jquery/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/qrcode/qrcode.js"></script>
+    <script src="js/createscreen.js"></script>
+    <script src="/anijs/anijs-min.js"></script>
+</head>
 
-<section class="container text-center">
-    <h1>Create a new room!</h1>
-    <button onclick="createRoom()" class="btn btn-primary">Generate room!</button>
-    <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
-        <canvas id="qrcode-region"></canvas>
-    </div>
-</section>
+<body>
+    <section data-anijs="if: load, on: window, do: pulse animated infinite, to: button" class="container text-center">
+        <h1>Create a new room!</h1>
+        <button data-anijs="if: click, do: bounceInUp animated, to: canvas" onclick="createRoom()" class="btn btn-primary">Generate room!</button>
+        <div class="row">
+            <div class="canvas-container col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+                <canvas id="qrcode-region"></canvas>
+            </div>
+        </div>
+    </section>
+    <script src="/anijs/anijs-min.js"></script>
+</body>
