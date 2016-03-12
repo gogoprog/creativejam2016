@@ -63,6 +63,10 @@ class Game {
             {
                 that.players.splice(index, 1);
                 that.state = State.WAITING_FOR_PLAYERS;
+                for(var p in that.players)
+                {
+                    that.players[p].index = p;
+                }
             }
         });
 
