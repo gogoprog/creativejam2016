@@ -56,6 +56,7 @@ class Game {
         this.emit('join', "player joined " + this.name);
 
         socket.index = this.players.length - 1;
+        socket.totalScore = 0;
 
         let that = this;
         socket.on('word', function(data) {
@@ -127,23 +128,47 @@ class Game {
 
     showDown()
     {
-        console.log('ShowDown', this.players.length);
+        console.log('ShowDown');
         let scores = [];
         this.state = State.SHOWDOWN;
         let bestScore = 0;
-        let bestPlayerIndex = -1;
+        let winners = [];
 
         for(let p in this.players)
         {
             let score = Logic.calculateStringScore(this.playerWords[p]);
             scores.push(score);
 
+            if(score > bestScore)
+            {
+                winners = [p];
+                bestScore = score;
+            }
+            else if(score == bestScore)
+            {
+                winners.push(p);
+            }
+
+            this.players[p].totalScore += score;
         }
+
+        let allResults = [];
 
         for(let p in this.players)
         {
-            this.players[p].emit('result', scores[p]);
+            let result = {
+                score: scores[p],
+                totalScore: this.players[p].totalScore,
+                win: (winners.indexOf(p) != -1)
+            };
+
+            this.players[p].emit('result', result);
+
+            allResults.push(result);
+            this.players[p].ready = false;
         }
+
+        this.state = State.WAITING_FOR_PLAYERS;
     }
 }
 
