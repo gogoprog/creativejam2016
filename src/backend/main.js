@@ -3,11 +3,20 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var logic = require('./logic');
+var Game = require('./game.js');
+var games = {};
 
 io.on('connection', function(socket) {
     console.log("Client connected.");
     socket.on('join', function(roomName) {
-        socket.broadcast.to(roomName).emit('join', "player join");
+        console.log("Client joined room", roomName);
+
+        if(!(roomName in games))
+        {
+            games[roomName] = new Game(io, roomName);
+        }
+
+        games[roomName].addPlayer(socket);
     });
 });
 
