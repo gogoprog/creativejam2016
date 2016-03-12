@@ -1,7 +1,14 @@
 var socket = io();
+var mainForm = null;
+var readyContainer = null;
 
 $( document ).ready(function() {
-    $("#mainForm").hide();
+    mainForm = $("#mainForm");
+    waitingForOtherPlayers = $("#waitingForOtherPlayers");
+    readyContainer = $("#readyContainer");
+
+    mainForm.hide();
+    waitingForOtherPlayers.hide();
 
     var name = document.location.search;
     name = name.match(/\?name=(.*)/);
@@ -12,15 +19,26 @@ $( document ).ready(function() {
     socket.emit('join', name[1]);
 
     socket.on('start', function(word){
-        $("#mainForm").show();
-        $("#readyContainer").hide();
+        mainForm.show();
+        readyContainer.hide();
+    });
+
+    socket.on('result', function(result){
+        console.log('result');
+        console.log(result);
+
+        waitingForOtherPlayers.hide();
+        // show results ( + win if you won ) and ready button. flow repeats.
     });
 });
 
-function submit()
+function submitAnswer()
 {
     var input = $("#playerInput").val();
     socket.emit('word', input);
+
+    mainForm.hide();
+    waitingForOtherPlayers.show();
 }
 
 function onReady()

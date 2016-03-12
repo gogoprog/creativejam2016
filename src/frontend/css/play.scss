@@ -1,14 +1,17 @@
+$bigfontsize: 50px;
+$readyfontsize: 70px;
+
 body {
-    font-size: 6vw;
+    font-size: $bigfontsize;
 }
 
 .big-input {
-    font-size: 6vw;
+    font-size: $bigfontsize;
     height: inherit;
 }
 
 .ready {
     width: 100%;
-    height: 30vw;
-    font-size: 18vw;
+    height: 200px;
+    font-size: $readyfontsize;
 }
