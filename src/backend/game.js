@@ -1,8 +1,11 @@
 'use strict';
 var Logic = require('./logic');
+var SynonymAntonym = require('./synonym_antonym');
 
 let fs = require('fs');
 let words;
+
+var wordData = new SynonymAntonym('ryigBKZzAXACmbtHda2s');
 
 fs.readFile(__dirname + '/words.json', 'utf8', function (err,data) {
     if(err) console.log(err);
@@ -123,9 +126,13 @@ class Game {
         this.currentWord = words.en[0];
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = '';
-        this.emit('start', this.currentWord);
-        this.mainScreenEmit('start', this.currentWord);
-        this.state = State.WAITING_FOR_WORDS;
+        var that = this;
+        wordData.getWordData("ordinateur", "fr_FR").then( function(data) {
+            console.log(data);
+            that.emit('start', that.currentWord);
+            that.mainScreenEmit('start', that.currentWord);
+            that.state = State.WAITING_FOR_WORDS;
+        });
     }
 
     onWord(socket, word)
