@@ -41,10 +41,6 @@ class Game {
             this.emit('ip', addresses[0]);
         }
 
-        qrcode.toDataURL( addresses[0] + "login/?name=" + name, function(err, url) {
-            console.log(url);
-        } );
-
         this.state = State.WAITING_FOR_PLAYERS;
     }
 
