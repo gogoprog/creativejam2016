@@ -4,7 +4,7 @@ let fs = require('fs');
 let ParsedScore = null;
 let Logic = {};
 
-fs.readFile(__dirname + '/../common/score.json', 'utf8', function (err, data) {
+fs.readFile(__dirname + '/score.json', 'utf8', function (err, data) {
     if(err) console.log(err);
     ParsedScore = JSON.parse(data);
 });
