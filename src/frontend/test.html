@@ -38,4 +38,9 @@
         socket.emit('word', 'foo');
     });
 
+    socket.on('result', function(result){
+        console.log('result');
+        console.log(result);
+    });
+
 </script>
