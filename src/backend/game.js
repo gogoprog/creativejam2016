@@ -54,6 +54,7 @@ class Game {
 
         socket.index = this.players.length - 1;
         socket.totalScore = 0;
+        socket.ready = false;
 
         let that = this;
         socket.on('word', function(data) {
@@ -90,30 +91,34 @@ class Game {
         });
 
         socket.on('ready', function(name){
-            socket.ready = true;
-
-            if(name !== undefined)
+            if(!socket.ready)
             {
-                socket.name = name;
-                that.mainScreenEmit('playerName', {index:socket.index, name:name});
-            }
+                socket.ready = true;
+                console.log('User is ready', name || socket.name);
 
-            if(that.state == State.WAITING_FOR_PLAYERS)
-            {
-                let ready = true;
-
-                for(var p in that.players)
+                if(name !== undefined)
                 {
-                    if(!that.players[p].ready)
-                    {
-                        ready = false;
-                        break;
-                    }
+                    socket.name = name;
+                    that.mainScreenEmit('playerName', {index:socket.index, name:name});
                 }
 
-                if(ready)
+                if(that.state == State.WAITING_FOR_PLAYERS)
                 {
-                    that.start();
+                    let ready = true;
+
+                    for(var p in that.players)
+                    {
+                        if(!that.players[p].ready)
+                        {
+                            ready = false;
+                            break;
+                        }
+                    }
+
+                    if(ready)
+                    {
+                        that.start();
+                    }
                 }
             }
         });
