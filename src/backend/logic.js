@@ -1,5 +1,3 @@
-'use strict';
-
 var ParsedScore = null;
 
 function initialize()
@@ -8,10 +6,12 @@ function initialize()
 }
 
 function calculateStringScore( string ) {
+    'use strict';
+
     let i = string.length;
     let score = 0;
 
-    calculateCharacterScore = function( char ) {
+    var calculateCharacterScore = function( char ) {
         if ( ParsedScore.hasOwnProperty(char) ) {
             return ParsedScore[char];
         }

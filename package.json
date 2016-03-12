@@ -7,7 +7,7 @@
     "bootstrap": "~3.3.6"
   },
   "scripts": {
-    "start": "nodemon src/backend/main.js"
+    "start": "nodemon --harmony src/backend/main.js"
   },
   "devDependencies": {
     "gulp-sass": "~2.2.0",

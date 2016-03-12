@@ -1,4 +1,5 @@
 'use strict';
+var logic = require('./logic');
 
 class Game {
     constructor(io, name)
@@ -6,6 +7,8 @@ class Game {
         this.io = io;
         this.name = name;
         this.players = [];
+
+        logic.initialize();
     }
 
     addPlayer(socket)
