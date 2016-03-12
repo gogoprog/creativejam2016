@@ -68,11 +68,11 @@ class Game {
         });
 
         socket.on('disconnect', function(){
-            var index = this.players.indexOf(socket);
+            var index = that.players.indexOf(socket);
             if(index != -1)
             {
-                this.players.splice(index, 1);
-                this.state = State.WAITING_FOR_PLAYERS;
+                that.players.splice(index, 1);
+                that.state = State.WAITING_FOR_PLAYERS;
             }
         });
     }
