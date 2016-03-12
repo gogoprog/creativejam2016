@@ -9,8 +9,6 @@ function createRoom() {
 
     let socket = io();
 
-    socket.emit('join', room_name);
-
     socket.on('join', function(msg){
         console.log('join: ' + msg);
     });

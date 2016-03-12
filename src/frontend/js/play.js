@@ -1,10 +1,11 @@
-/*$( document ).ready(function() {
-    //$("#mainForm").hide();
+var socket = io();
+
+$( document ).ready(function() {
+    $("#mainForm").hide();
 
     var name = document.location.search;
     name = name.match(/\?name=(.*)/);
 
-    var socket = io();
 
     console.log(name[1]);
     // connect on socket IO
@@ -13,7 +14,7 @@
     socket.on('start', function(word){
         $("#mainForm").show();
     });
-});*/
+});
 
 function submit()
 {
@@ -23,5 +24,9 @@ function submit()
 
 function onReady( elem )
 {
-    $(elem).removeClass("btn-warning").addClass("btn-success");
+    $(elem)
+        .removeClass("btn-warning")
+        .addClass("btn-success")
+        .off();
+    socket.emit('ready');
 }
