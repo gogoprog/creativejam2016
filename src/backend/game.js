@@ -1,6 +1,4 @@
 'use strict';
-var os = require('os');
-var qrcode = require('qrcode');
 var Logic = require('./logic');
 
 let fs = require('fs');
@@ -23,24 +21,6 @@ class Game {
         this.io = io;
         this.name = name;
         this.players = [];
-
-        // new room. Generate QR code for this room.
-
-        var interfaces = os.networkInterfaces();
-        var addresses = [];
-        for (var k in interfaces) {
-            for (var k2 in interfaces[k]) {
-                var address = interfaces[k][k2];
-                if (address.family === 'IPv4' && !address.internal) {
-                    addresses.push(address.address);
-                }
-            }
-        }
-
-        if ( addresses.length > 0 ) {
-            this.emit('ip', addresses[0]);
-        }
-
         this.state = State.WAITING_FOR_PLAYERS;
     }
 
@@ -49,11 +29,25 @@ class Game {
         this.io.to(this.name).emit(e, data);
     }
 
+    mainScreenEmit(e, data)
+    {
+        if('mainScreenSocket' in this)
+        {
+            this.mainScreenSocket.emit(e, data);
+        }
+    }
+
+    setMainScreen(socket)
+    {
+        this.mainScreenSocket = socket;
+    }
+
     addPlayer(socket)
     {
         socket.join(this.name);
         this.players.push(socket);
         this.emit('join', "player joined " + this.name);
+        this.mainScreenEmit('players', this.players.length);
 
         socket.index = this.players.length - 1;
         socket.totalScore = 0;
@@ -69,11 +63,21 @@ class Game {
             {
                 that.players.splice(index, 1);
                 that.state = State.WAITING_FOR_PLAYERS;
+                for(var p in that.players)
+                {
+                    that.players[p].index = p;
+                }
             }
         });
 
-        socket.on('ready', function(){
+        socket.on('ready', function(name){
             socket.ready = true;
+
+            if(name !== undefined)
+            {
+                socket.name = name;
+                this.mainScreenSocket.emit('playerName', {index:socket.index, name:name});
+            }
 
             if(that.state == State.WAITING_FOR_PLAYERS)
             {
@@ -102,6 +106,7 @@ class Game {
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = null;
         this.emit('start', this.currentWord);
+        this.mainScreenEmit('start', this.currentWord);
         this.state = State.WAITING_FOR_WORDS;
     }
 
@@ -167,6 +172,8 @@ class Game {
             allResults.push(result);
             this.players[p].ready = false;
         }
+
+        this.mainScreenEmit('results', allResults);
 
         this.state = State.WAITING_FOR_PLAYERS;
     }

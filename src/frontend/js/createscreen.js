@@ -13,6 +13,20 @@ function createRoom() {
         console.log('join: ' + msg);
     });
 
+    socket.on('results', function(results){
+        console.log('results');
+        console.log(results);
+    });
+
+    socket.on('players', function(count){
+        console.log('players', count);
+    });
+
+    socket.on('results', function(results){
+        console.log('results');
+        console.log(results);
+    });
+
     var qrcodedraw = new QRCodeLib.QRCodeDraw();
 
     playUrl = document.location.origin + "/play.html?name=" + room_name;
