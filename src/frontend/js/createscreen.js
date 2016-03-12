@@ -17,6 +17,7 @@ function createRoom() {
 
     playUrl = document.location.origin + "/play.html?name=" + room_name;
     roomIsCreated = true;
+    qrcodedraw.scale = 8;
     qrcodedraw.draw(document.getElementById('qrcode-region'), playUrl, function(error,canvas){
       if(error){
          return console.log('Error: ',error);
