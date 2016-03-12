@@ -1,11 +1,34 @@
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+
+<section class="container text-center">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="form-group">
+            <label for="main-input">Room</label>
+            <input class="form-control" type="text" placeholder="Room" id="room"/>
+        </div>
+        <button class="btn btn-primary" onclick="join()">Submit</button>
+    </div>
+</section>
+
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    var socket = io();
+    function join()
+    {
+        var name = $('#room').val();
+        socket.emit('join', name);
+    }
 
-    socket.emit('join', 'testRoom');
+    var socket = io();
 
     socket.on('join', function(msg){
         console.log('join: ' + msg);
+    });
+
+    socket.on('start', function(word){
+        console.log('start: ' + word);
+        socket.emit('word', 'foo');
     });
 
 </script>
