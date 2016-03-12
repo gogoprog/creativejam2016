@@ -9,13 +9,15 @@
         <form id="mainForm" action="javascript:" onSubmit="submit()" class="text-left">
             <div class='form-group'>
                 <label for="playerInput">Give your antonyme</label>
-                <input id="playerInput" class="form-control" type="text"  placeholder="Give your antonyme" required>
+                <input id="playerInput" class="big-input form-control input-xlarge" type="text"  placeholder="Give your antonyme" required>
             </div>
-            <input type="submit" class="btn btn-primary" value="Go!">
+            <input type="submit" class="btn btn-primary big-input" value="Go!">
         </form>
     </div>
 </section>
 
-<section class="container text-center">
-    <button class="btn btn-warning ready" onclick="onReady(this)">Ready!</button>
+<section id="readyContainer" class="container text-center">
+    <div class="col-xs-12 col-md-8- col-md-offset-2">
+        <button class="btn btn-warning ready" onclick="onReady(this)">Ready!</button>
+    </div>
 </section>

@@ -13,6 +13,7 @@ $( document ).ready(function() {
 
     socket.on('start', function(word){
         $("#mainForm").show();
+        $("#readyContainer").hide();
     });
 });
 
