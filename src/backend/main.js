@@ -6,6 +6,8 @@ var Game = require('./game.js');
 var games = {};
 
 io.on('connection', function(socket) {
+    'use strict';
+    
     console.log("Client connected.");
     socket.on('join', function(roomName) {
         console.log("Client joined room", roomName);
@@ -18,13 +20,15 @@ io.on('connection', function(socket) {
         games[roomName].addPlayer(socket);
     });
 
-    socket.on('mainScreen', function(roomName) {
+    socket.on('mainScreen', function(object) {
+        let roomName = object.name;
         if(!(roomName in games))
         {
             games[roomName] = new Game(io, roomName);
         }
 
         games[roomName].setMainScreen(socket);
+        games[roomName].setLanguage(object.language);
     });
 });
 

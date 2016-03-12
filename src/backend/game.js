@@ -25,6 +25,7 @@ class Game {
         this.name = name;
         this.players = [];
         this.state = State.WAITING_FOR_PLAYERS;
+        this.Language = "fr_FR";
     }
 
     emit(e, data)
@@ -43,6 +44,11 @@ class Game {
     setMainScreen(socket)
     {
         this.mainScreenSocket = socket;
+    }
+
+    setLanguage(language)
+    {
+        this.Language = language;
     }
 
     addPlayer(socket)
@@ -128,13 +134,13 @@ class Game {
     {
         console.log('Start');
         this.firstWord = false;
-        let w = words.fr_FR;
+        let w = words[this.Language];
         this.currentWord = w[Math.floor(Math.random()*w.length)];
         console.log("Current word: " + this.currentWord );
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = '';
         var that = this;
-        wordData.getWordData(this.currentWord, "fr_FR", function(data) {
+        wordData.getWordData(this.currentWord, this.Language, function(data) {
             let type = "synonym";
             if ( data.anthonyms ) {
                 if ( Math.random() > 0.5 ) {

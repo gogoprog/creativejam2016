@@ -13,9 +13,9 @@
     <section data-anijs="if: load, on: window, do: pulse animated infinite, to: button" class="container text-center" id="createSection">
         <h1>Create a new room!</h1>
         <div class="form-group">
-            <select class="form-control">
-              <option value="English">English</option>
-              <option value="French">French</option>
+            <select id="languageSelector" class="form-control">
+              <option value="fr_FR">Français</option>
+              <option value="en_US">English</option>
             </select>
             <button data-anijs="if: click, do: bounceInUp animated, to: canvas" onclick="createRoom()" class="btn btn-primary">Generate room!</button>
         </div>
@@ -26,7 +26,6 @@
         </div>
     </section>
     <section id="gameSection">
-        <span id="word">?</span>
         <h1><span class="label label-default" id="word">?</span></h1>
         <h1>Search for a: <span id='type'></span></h1>
         <div id='players'>

@@ -2,6 +2,7 @@
 var playUrl = "";
 var roomIsCreated = false;
 var playerModel;
+var language;
 
 function createRoom() {
     'use strict';
@@ -34,7 +35,8 @@ function createRoom() {
         fillPlayersData(results);
     });
 
-    socket.emit('mainScreen', room_name);
+    language = $("#languageSelector").val();
+    socket.emit('mainScreen', { "name" : room_name, "language": language } );
 
     var qrcodedraw = new QRCodeLib.QRCodeDraw();
 
@@ -48,6 +50,7 @@ function createRoom() {
       }
       console.log('success!');
     });
+
 }
 
 function closeLobby()
