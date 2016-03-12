@@ -48,8 +48,12 @@ class Game {
         });
 
         socket.on('disconnect', function(){
-            this.players.splice(this.players.indexOf(socket), 1);
-            this.state = State.WAITING_FOR_PLAYERS;
+            var index = this.players.indexOf(socket);
+            if(index != -1)
+            {
+                this.players.splice(index, 1);
+                this.state = State.WAITING_FOR_PLAYERS;
+            }
         });
     }
 
