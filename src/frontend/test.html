@@ -10,6 +10,8 @@
         </div>
         <button class="btn btn-primary" onclick="join()">Submit</button>
     </div>
+
+    <button class="btn btn-primary" onclick="ready()">Ready</button>
 </section>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -20,10 +22,14 @@
         socket.emit('join', name);
     }
 
+    function ready()
+    {
+        socket.emit('ready');
+    }
+
     var socket = io();
 
     socket.on('join', function(msg){
-        console.log('join: ' + msg);
     });
 
     socket.on('start', function(word){

@@ -57,11 +57,6 @@ class Game {
 
         socket.index = this.players.length - 1;
 
-        if(this.state == State.WAITING_FOR_PLAYERS && this.players.length > 1)
-        {
-            this.start();
-        }
-
         let that = this;
         socket.on('word', function(data) {
             that.onWord(socket, data);
@@ -73,6 +68,29 @@ class Game {
             {
                 that.players.splice(index, 1);
                 that.state = State.WAITING_FOR_PLAYERS;
+            }
+        });
+
+        socket.on('ready', function(){
+            socket.ready = true;
+
+            if(that.state == State.WAITING_FOR_PLAYERS && that.players.length > 1)
+            {
+                let ready = true;
+
+                for(var p in that.players)
+                {
+                    if(!that.players[p].ready)
+                    {
+                        ready = false;
+                        break;
+                    }
+                }
+
+                if(ready)
+                {
+                    that.start();
+                }
             }
         });
     }
