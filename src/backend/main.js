@@ -17,6 +17,15 @@ io.on('connection', function(socket) {
 
         games[roomName].addPlayer(socket);
     });
+
+    socket.on('mainScreen', function(roomName) {
+        if(!(roomName in games))
+        {
+            games[roomName] = new Game(io, roomName);
+        }
+
+        games[roomName].setMainScreen(socket);
+    });
 });
 
 

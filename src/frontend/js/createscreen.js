@@ -13,9 +13,8 @@ function createRoom() {
         console.log('join: ' + msg);
     });
 
-    socket.on('results', function(results){
-        console.log('results');
-        console.log(results);
+    socket.on('start', function(word){
+        $('#word').text(word);
     });
 
     socket.on('players', function(count){
@@ -27,9 +26,12 @@ function createRoom() {
         console.log(results);
     });
 
+    socket.emit('mainScreen', room_name);
+
     var qrcodedraw = new QRCodeLib.QRCodeDraw();
 
     playUrl = document.location.origin + "/play.html?name=" + room_name;
+    console.log(playUrl);
     roomIsCreated = true;
     qrcodedraw.scale = 8;
     qrcodedraw.draw(document.getElementById('qrcode-region'), playUrl, function(error,canvas){

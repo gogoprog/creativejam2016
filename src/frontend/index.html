@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <section data-anijs="if: load, on: window, do: pulse animated infinite, to: button" class="container text-center">
+    <section data-anijs="if: load, on: window, do: pulse animated infinite, to: button" class="container text-center" id="createSection">
         <h1>Create a new room!</h1>
         <button data-anijs="if: click, do: bounceInUp animated, to: canvas" onclick="createRoom()" class="btn btn-primary">Generate room!</button>
         <div class="row">
@@ -18,6 +18,9 @@
                 <canvas id="qrcode-region"></canvas>
             </div>
         </div>
+    </section>
+    <section id="gameSection">
+        <span id="word">?</span>
     </section>
     <script src="/anijs/anijs-min.js"></script>
 </body>

@@ -76,7 +76,7 @@ class Game {
             if(name !== undefined)
             {
                 socket.name = name;
-                this.mainScreenSocket.emit('playerName', {index:socket.index, name:name});
+                that.mainScreenEmit('playerName', {index:socket.index, name:name});
             }
 
             if(that.state == State.WAITING_FOR_PLAYERS)
@@ -102,6 +102,7 @@ class Game {
 
     start()
     {
+        console.log('Start');
         this.currentWord = words.en[0];
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = null;
