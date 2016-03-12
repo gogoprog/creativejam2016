@@ -16,7 +16,6 @@ io.on('connection', function(socket) {
         }
 
         games[roomName].addPlayer(socket);
-        socket.emit('join', 'test');
     });
 });
 

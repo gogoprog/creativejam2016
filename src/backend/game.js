@@ -11,10 +11,16 @@ class Game {
         logic.initialize();
     }
 
+    emit(e, data)
+    {
+        this.io.to(this.name).emit(e, data);
+    }
+
     addPlayer(socket)
     {
+        socket.join(this.name);
         this.players.push(socket);
-        this.io.to(this.name).emit('join', "player join");
+        this.emit('join', "player join");
     }
 }
 
