@@ -1,13 +1,16 @@
-var ParsedScore = null;
+'use strict';
 
-function initialize()
-{
-    ParsedScore = JSON.parse('../common/score.json');
-}
+let fs = require('fs');
+let ParsedScore = null;
+let Logic = {};
 
-function calculateStringScore( string ) {
-    'use strict';
+fs.readFile(__dirname + '/../common/score.json', 'utf8', function (err, data) {
+    if(err) console.log(err);
+    ParsedScore = JSON.parse(data);
+});
 
+
+Logic.calculateStringScore = function(string) {
     let i = string.length;
     let score = 0;
 
@@ -24,7 +27,6 @@ function calculateStringScore( string ) {
     }
 
     return score;
-}
+};
 
-module.exports.initialize = initialize;
-module.exports.calculateStringScore = calculateStringScore;
+module.exports = Logic;

@@ -1,10 +1,11 @@
 'use strict';
-var logic = require('./logic');
+var Logic = require('./logic');
 
 let fs = require('fs');
 let words;
 
-fs.readFile('words.json', 'utf8', function (err,data) {
+fs.readFile(__dirname + '/words.json', 'utf8', function (err,data) {
+    if(err) console.log(err);
     words = JSON.parse(data);
 });
 
@@ -14,8 +15,6 @@ class Game {
         this.io = io;
         this.name = name;
         this.players = [];
-
-        logic.initialize();
     }
 
     emit(e, data)
