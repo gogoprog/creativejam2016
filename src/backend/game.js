@@ -10,6 +10,7 @@ class Game {
 
     addPlayer(socket)
     {
+        socket.join(this.name);
         this.players.push(socket);
         this.io.to(this.name).emit('join', "player join");
     }
