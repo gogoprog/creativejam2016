@@ -42,11 +42,14 @@ $( document ).ready(function() {
             .on("click", onReady );
 
         waitingForOtherPlayers.hide();
-        if ( result.hasOwnProperty("win") ) {
+
+        if ( result.win ) {
             background.css("background-color", "green");
         } else {
             background.css("background-color", "red");
         }
+
+        mainForm.hide();
 
         $("#score").text( result.score );
         // show results ( + win if you won ) and ready button. flow repeats.
