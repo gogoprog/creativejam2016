@@ -12,6 +12,7 @@ io.on('connection', function(socket) {
 
 
 app.use(express.static(__dirname + '/../frontend'));
+app.use("/bootstrap/", express.static(__dirname + '../../node_modules/bootstrap/dist/'));
 app.use("/socket.io/", express.static(__dirname + '../../node_modules/socket.io-client/'));
 
 server.listen(process.env.PORT || 8000);

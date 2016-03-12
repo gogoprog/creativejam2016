@@ -3,9 +3,15 @@
   "version": "0.0.1",
   "dependencies": {
     "express": "^4.13.4",
-    "socket.io": "^1.4.5"
+    "socket.io": "^1.4.5",
+    "bootstrap": "~3.3.6"
   },
   "scripts": {
-    "start": "node src/backend/main.js"
+    "start": "nodemon src/backend/main.js"
+  },
+  "devDependencies": {
+    "gulp-sass": "~2.2.0",
+    "gulp": "~3.9.1",
+    "nodemon": "~1.9.1"
   }
 }
