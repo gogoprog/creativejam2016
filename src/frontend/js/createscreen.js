@@ -31,6 +31,7 @@ function createRoom() {
     socket.on('results', function(results){
         console.log('results');
         console.log(results);
+        fillPlayersData(results);
     });
 
     socket.emit('mainScreen', room_name);
@@ -87,6 +88,17 @@ function setPlayerCount(count)
         {
             container.children().last().remove();
         }
+    }
+}
+
+function fillPlayersData(results)
+{
+    var totalScores = $('.totalScore');
+
+    for(var r in results)
+    {
+        var result = results[r];
+        totalScores.eq(r).text(result.totalScore);
     }
 }
 
