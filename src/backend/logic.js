@@ -17,26 +17,27 @@ Logic.setCorrectWords = function(data) {
 };
 
 Logic.calculateStringScore = function(string) {
-    string = normalizeSearch(string)
-    if ( CorrectWords.indexOf(string) > -1 ) {
-        let i = string.length;
-        let score = 0;
+    if ( string ) {
+        string = normalizeSearch(string);
+        if ( CorrectWords.indexOf(string) > -1 ) {
+            let i = string.length;
+            let score = 0;
 
-        var calculateCharacterScore = function( char ) {
-            if ( ParsedScore.alphabet.hasOwnProperty(char) ) {
-                return ParsedScore.alphabet[char];
+            var calculateCharacterScore = function( char ) {
+                if ( ParsedScore.alphabet.hasOwnProperty(char) ) {
+                    return ParsedScore.alphabet[char];
+                }
+
+                return 0;
+            };
+
+            while (i--) {
+              score += calculateCharacterScore( string.charAt(i) );
             }
 
-            return 0;
-        };
-
-        while (i--) {
-          score += calculateCharacterScore( string.charAt(i) );
+            return score;
         }
-
-        return score;
     }
-
     return 0;
 };
 
