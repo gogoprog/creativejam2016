@@ -1,5 +1,6 @@
 'use strict';
 
+let normalizeSearch = require('normalize-for-search');
 var request = require('request-promise');
 
 class SynonymAntonym {
@@ -31,7 +32,7 @@ class SynonymAntonym {
 
         let antonym = null;
         for ( let i = synonyms.length -1; i > 0; --i ) {
-            synonyms[i] = synonyms[i].toLowerCase();
+            synonyms[i] = normalizeSearch(synonyms[i]);
             let index = synonyms[i].search("(antonym)");
             if( index > -1 ) {
                 antonym = synonyms.splice( i, 1 )[0];
@@ -49,7 +50,7 @@ class SynonymAntonym {
                 }
 
                 for ( let i = antonyms.length -1; i > 0; --i ) {
-                    antonyms[i] = antonyms[i].toLowerCase();
+                    antonyms[i] = normalizeSearch(antonyms[i]);
                     let index = antonyms[i].search("(antonym)");
                     if( index > -1 ) {
                         antonyms.splice( i, 1 );

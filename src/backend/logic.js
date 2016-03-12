@@ -1,6 +1,7 @@
 'use strict';
 
 let fs = require('fs');
+let normalizeSearch = require('normalize-for-search');
 let ParsedScore = null;
 let Logic = {};
 let CorrectWords = [];
@@ -16,7 +17,8 @@ Logic.setCorrectWords = function(data) {
 };
 
 Logic.calculateStringScore = function(string) {
-    if ( CorrectWords.indexOf(string.toLowerCase()) > -1 ) {
+    string = normalizeSearch(string)
+    if ( CorrectWords.indexOf(string) > -1 ) {
         let i = string.length;
         let score = 0;
 
