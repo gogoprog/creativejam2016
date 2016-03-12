@@ -54,7 +54,21 @@ class Game {
 
         let that = this;
         socket.on('word', function(data) {
-            that.onWord(socket, data);
+            if(that.state == State.WAITING_FOR_WORDS)
+            {
+                that.onWord(socket, data);
+                if(!that.firstWord)
+                {
+                    that.firstWord = true;
+                    let currentWord = that.currentWord;
+                    setTimeout(function(){
+                        if(that.state == State.WAITING_FOR_WORDS && that.currentWord == currentWord)
+                        {
+                            that.showDown();
+                        }
+                    },5000);
+                }
+            }
         });
 
         socket.on('disconnect', function(){
@@ -103,9 +117,10 @@ class Game {
     start()
     {
         console.log('Start');
+        this.firstWord = false;
         this.currentWord = words.en[0];
         this.playerWords = Array(this.players.length);
-        for(var p in this.players) this.playerWords[p] = null;
+        for(var p in this.players) this.playerWords[p] = '';
         this.emit('start', this.currentWord);
         this.mainScreenEmit('start', this.currentWord);
         this.state = State.WAITING_FOR_WORDS;
@@ -119,7 +134,7 @@ class Game {
         let completed = true;
         for(var p in this.playerWords)
         {
-            if(this.playerWords[p] === null)
+            if(this.playerWords[p] === '')
             {
                 completed = false;
                 break;
