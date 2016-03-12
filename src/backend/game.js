@@ -74,7 +74,7 @@ class Game {
         socket.on('ready', function(){
             socket.ready = true;
 
-            if(that.state == State.WAITING_FOR_PLAYERS && that.players.length > 1)
+            if(that.state == State.WAITING_FOR_PLAYERS)
             {
                 let ready = true;
 
@@ -115,12 +115,34 @@ class Game {
             if(this.playerWords[p] === null)
             {
                 completed = false;
+                break;
             }
         }
 
         if(completed)
         {
-            this.state = State.SHOWDOWN;
+            this.showDown();
+        }
+    }
+
+    showDown()
+    {
+        console.log('ShowDown', this.players.length);
+        let scores = [];
+        this.state = State.SHOWDOWN;
+        let bestScore = 0;
+        let bestPlayerIndex = -1;
+
+        for(let p in this.players)
+        {
+            let score = Logic.calculateStringScore(this.playerWords[p]);
+            scores.push(score);
+
+        }
+
+        for(let p in this.players)
+        {
+            this.players[p].emit('result', scores[p]);
         }
     }
 }

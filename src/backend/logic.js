@@ -15,8 +15,8 @@ Logic.calculateStringScore = function(string) {
     let score = 0;
 
     var calculateCharacterScore = function( char ) {
-        if ( ParsedScore.hasOwnProperty(char) ) {
-            return ParsedScore[char];
+        if ( ParsedScore.alphabet.hasOwnProperty(char) ) {
+            return ParsedScore.alphabet[char];
         }
 
         return 0;
