@@ -31,6 +31,7 @@ class SynonymAntonym {
 
         let antonym = null;
         for ( let i = synonyms.length -1; i > 0; --i ) {
+            synonyms[i] = synonyms[i].toLowerCase();
             let index = synonyms[i].search("(antonym)");
             if( index > -1 ) {
                 antonym = synonyms.splice( i, 1 )[0];
@@ -48,6 +49,7 @@ class SynonymAntonym {
                 }
 
                 for ( let i = antonyms.length -1; i > 0; --i ) {
+                    antonyms[i] = antonyms[i].toLowerCase();
                     let index = antonyms[i].search("(antonym)");
                     if( index > -1 ) {
                         antonyms.splice( i, 1 );

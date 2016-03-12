@@ -125,11 +125,13 @@ class Game {
         this.firstWord = false;
         let w = words.en_US;
         this.currentWord = w[Math.floor(Math.random()*w.length)];
+        console.log("Current word: " + this.currentWord );
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = '';
         var that = this;
         wordData.getWordData(this.currentWord, "en_US").then( function(data) {
-            console.log(data);
+            that.correctWords = data.synonyms;
+            console.log(that.correctWords);
             that.emit('start', that.currentWord);
             that.mainScreenEmit('start', that.currentWord);
             that.state = State.WAITING_FOR_WORDS;
@@ -165,6 +167,7 @@ class Game {
         let bestScore = 0;
         let winners = [];
 
+        Logic.setCorrectWords(this.correctWords);
         for(let p in this.players)
         {
             let score = Logic.calculateStringScore(this.playerWords[p]);
