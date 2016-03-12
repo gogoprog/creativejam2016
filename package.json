@@ -2,7 +2,10 @@
   "name": "OurServer",
   "version": "0.0.1",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "socket.io": "^1.4.5"
   },
-  "scripts": {"start": "node src/backend/main.js"}
+  "scripts": {
+    "start": "node src/backend/main.js"
+  }
 }
