@@ -82,6 +82,8 @@ class Game {
                     that.players[p].index = p;
                 }
             }
+
+            that.mainScreenEmit('players', that.players.length);
         });
 
         socket.on('ready', function(name){

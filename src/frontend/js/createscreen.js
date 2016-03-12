@@ -1,6 +1,7 @@
 
 var playUrl = "";
 var roomIsCreated = false;
+var playerModel;
 
 function createRoom() {
     'use strict';
@@ -18,7 +19,12 @@ function createRoom() {
     });
 
     socket.on('players', function(count){
-        console.log('players', count);
+        setPlayerCount(count);
+    });
+
+    socket.on('playerName', function(data){
+        console.log(data);
+        $('.playerName').eq(data.index).text(data.name);
     });
 
     socket.on('results', function(results){
@@ -40,9 +46,6 @@ function createRoom() {
       }
       console.log('success!');
     });
-
-    // note: Must return false to prevent default behaviour
-    return false;
 }
 
 function closeLobby()
@@ -61,3 +64,32 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
+
+function setPlayerCount(count)
+{
+    console.log('setPlayerCount', count);
+    var container = $('#players');
+    var currentCount = container.children().size();
+
+    if(currentCount < count)
+    {
+        for(var i=0; i<count - currentCount; i++)
+        {
+            var element = playerModel.clone();
+            container.append(element);
+            element.show();
+        }
+    }
+    else if(currentCount > count)
+    {
+        for(var j=0; j<currentCount - count; j++)
+        {
+            container.children().last().remove();
+        }
+    }
+}
+
+$(function(){
+    playerModel = $('#playerModel');
+    playerModel.hide();
+});
