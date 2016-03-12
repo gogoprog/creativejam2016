@@ -4,5 +4,13 @@
         "house",
         "girl",
         "boy"
+    ],
+    "fr_FR":[
+        "voiture",
+        "maison",
+        "fille",
+        "homme",
+        "ballon",
+        "chanson"
     ]
 }

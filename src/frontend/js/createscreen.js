@@ -15,7 +15,8 @@ function createRoom() {
     });
 
     socket.on('start', function(word){
-        $('#word').text(word);
+        $('#word').text(word.word);
+        $('#type').text(word.type);
     });
 
     socket.on('players', function(count){

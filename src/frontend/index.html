@@ -12,7 +12,13 @@
 <body>
     <section data-anijs="if: load, on: window, do: pulse animated infinite, to: button" class="container text-center" id="createSection">
         <h1>Create a new room!</h1>
-        <button data-anijs="if: click, do: bounceInUp animated, to: canvas" onclick="createRoom()" class="btn btn-primary">Generate room!</button>
+        <div class="form-group">
+            <select class="form-control">
+              <option value="English">English</option>
+              <option value="French">French</option>
+            </select>
+            <button data-anijs="if: click, do: bounceInUp animated, to: canvas" onclick="createRoom()" class="btn btn-primary">Generate room!</button>
+        </div>
         <div class="row">
             <div class="canvas-container col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
                 <canvas id="qrcode-region"></canvas>
@@ -21,6 +27,7 @@
     </section>
     <section id="gameSection">
         <span id="word">?</span>
+        Search for a: <span id='type'></span>
         <div id='players'>
         </div>
     </section>

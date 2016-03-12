@@ -12,6 +12,7 @@ fs.readFile(__dirname + '/score.json', 'utf8', function (err, data) {
 
 Logic.setCorrectWords = function(data) {
     CorrectWords = data;
+    console.log(data);
 };
 
 Logic.calculateStringScore = function(string) {

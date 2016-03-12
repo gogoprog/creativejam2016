@@ -21,9 +21,9 @@ class SynonymAntonym {
     });
   }
 
-  getWordData(word, language) {
+  getWordData(word, language, callback) {
       var that = this;
-    return this.lookup(word, language).then( function(data) {
+    this.lookup(word, language).then( function(data) {
         var synonyms = [];
         for( let i = 0; i < data.response.length; ++i ) {
             synonyms = synonyms.concat( data.response[i].list.synonyms.split("|") );
@@ -41,7 +41,7 @@ class SynonymAntonym {
 
         if ( antonym ) {
             console.log( "Found antonyms: " + antonym );
-            return that.lookup(antonym, language).then( function(data) {
+            that.lookup(antonym, language).then( function(data) {
                 console.log( data );
                 var antonyms = [];
                 for( let i = 0; i < data.response.length; ++i ) {
@@ -56,10 +56,10 @@ class SynonymAntonym {
                     }
                 }
 
-                return { "synonyms" : synonyms, "antonyms" : antonyms };
+                callback( { "synonyms" : synonyms, "antonyms" : antonyms } );
             } );
         } else {
-            return { "synonyms" : synonyms };
+            callback( { "synonyms" : synonyms } );
         }
     } );
   }

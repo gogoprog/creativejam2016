@@ -123,17 +123,29 @@ class Game {
     {
         console.log('Start');
         this.firstWord = false;
-        let w = words.en_US;
+        let w = words.fr_FR;
         this.currentWord = w[Math.floor(Math.random()*w.length)];
         console.log("Current word: " + this.currentWord );
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = '';
         var that = this;
-        wordData.getWordData(this.currentWord, "en_US").then( function(data) {
-            that.correctWords = data.synonyms;
-            console.log(that.correctWords);
-            that.emit('start', that.currentWord);
-            that.mainScreenEmit('start', that.currentWord);
+        wordData.getWordData(this.currentWord, "fr_FR", function(data) {
+            let type = "synonym";
+            if ( data.anthonyms ) {
+                if ( Math.random() > 0.5 ) {
+                    that.correctWords = data.antonyms;
+                    type = "antonym";
+                }  else {
+                    that.correctWords = data.synonyms;
+                }
+            } else {
+                that.correctWords = data.synonyms;
+            }
+            var result_object = {};
+            result_object.word = that.currentWord;
+            result_object.type = type;
+            that.emit('start', result_object);
+            that.mainScreenEmit('start', result_object);
             that.state = State.WAITING_FOR_WORDS;
         });
     }
