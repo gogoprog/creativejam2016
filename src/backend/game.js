@@ -1,6 +1,13 @@
 'use strict';
 var logic = require('./logic');
 
+let fs = require('fs');
+let words;
+
+fs.readFile('words.json', 'utf8', function (err,data) {
+    words = JSON.parse(data);
+});
+
 class Game {
     constructor(io, name)
     {
