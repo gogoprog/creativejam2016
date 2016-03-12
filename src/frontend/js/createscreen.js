@@ -5,7 +5,7 @@ var roomIsCreated = false;
 function createRoom() {
     'use strict';
 
-    let room_name = $("#roomName").val();
+    let room_name = guid();
 
     let socket = io();
 
@@ -35,4 +35,14 @@ function closeLobby()
     if( roomIsCreated ) {
         window.location = playUrl;
     }
+}
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
 }

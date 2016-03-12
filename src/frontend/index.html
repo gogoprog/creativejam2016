@@ -6,13 +6,7 @@
 
 <section class="container text-center">
     <h1>Create a new room!</h1>
-    <form action="javascript:" onSubmit="createRoom()">
-        <div class='form-group'>
-            <label for="roomName">Enter a room name</label>
-            <input id="roomName" class="form-control" type="text" required>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Go!">
-    </form>
+    <button onclick="createRoom()" class="btn btn-primary">Generate room!</button>
 </section>
 
 <canvas id="qrcode-region"></canvas>
