@@ -123,12 +123,12 @@ class Game {
     {
         console.log('Start');
         this.firstWord = false;
-        let w = words.en;
+        let w = words.en_US;
         this.currentWord = w[Math.floor(Math.random()*w.length)];
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = '';
         var that = this;
-        wordData.getWordData("ordinateur", "fr_FR").then( function(data) {
+        wordData.getWordData(this.currentWord, "en_US").then( function(data) {
             console.log(data);
             that.emit('start', that.currentWord);
             that.mainScreenEmit('start', that.currentWord);
