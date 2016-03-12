@@ -123,7 +123,8 @@ class Game {
     {
         console.log('Start');
         this.firstWord = false;
-        this.currentWord = words.en[0];
+        let w = words.en;
+        this.currentWord = w[Math.floor(Math.random()*w.length)];
         this.playerWords = Array(this.players.length);
         for(var p in this.players) this.playerWords[p] = '';
         var that = this;
