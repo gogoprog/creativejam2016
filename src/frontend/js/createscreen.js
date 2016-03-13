@@ -44,8 +44,7 @@ function createRoom() {
         $('#type').text(word.type);
 
         playerContainer.children().data('word', '');
-        $('.playerWord').text('?');
-        $('.playerWordPosition').text('?');
+        $('.playerWord').text('...');
 
         receivedWordCount = 0;
         playerContainer.children().removeClass("ready");
@@ -68,7 +67,6 @@ function createRoom() {
     socket.on('playerWord', function(data){
         console.log('playerWord', data);
         playerContainer.children().eq(data.index).data('word', data.word);
-        $('.playerWordPosition').eq(data.index).text(++receivedWordCount);
     });
 
     socket.on('results', function(results){

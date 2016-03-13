@@ -31,17 +31,23 @@
         </div>
     </div>
     <section id="gameSection" data-anijs=" if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated">
-        <h1><span class="pulse animated infinite" id='type'></span></h1>
+        <h2><span id='type'></span></h2>
         <h1><span class="label label-default pulse animated infinite" id="word">?</span></h1>
     </section>
-    <div id='players' data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated; if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated">
+    <div id='players' class="col-xs-12" data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated; if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated">
     </div>
     <div class="text-center">
         <div id="playerModel" class="panel panel-default drop-shadow">
-            <h3><span class="label label-primary playerName">New Player!</span></h3>
-            <h3><span class="label label-info totalScore">0</span></h3>
-            <h3><span class="label label-warning playerWord">...</span></h3>
-            <h3><span class="label label-warning playerWordPosition">...</span></h3>
+            <ul>
+                <li>
+                    <h3>Name: <span class="label label-warning playerName">New Player!</span></h3>
+                </li>
+                <li>
+                    <h3>Word: <span class="label label-warning playerWord">...</span></h3>
+                </li>
+                <li>
+                    <h3>Score: <span class="label label-warning totalScore">0</span></h3>
+                </li>
         </div>
     </div>
 

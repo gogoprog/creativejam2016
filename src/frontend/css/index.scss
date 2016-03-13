@@ -3,6 +3,9 @@ body{
     overflow:hidden;
 }
 
+#gameSection {
+    zoom: 1.6;
+}
 #players > div {
     width: 30%;
     margin:5px;
@@ -19,6 +22,16 @@ body{
     width:100%;
     display:block;
     z-index:0;
+
+    .label {
+        float: right;
+        margin-right: 15px;
+    }
+
+    ul {
+        color: black;
+        text-align: left;
+    }
 }
 
 .canvasHolder {
