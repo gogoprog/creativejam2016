@@ -31,8 +31,8 @@
         </div>
     </div>
     <section id="gameSection" data-anijs=" if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated">
+        <h1><span class="pulse animated infinite" id='type'></span></h1>
         <h1><span class="label label-default pulse animated infinite" id="word">?</span></h1>
-        <h1>Search for a: <span class="pulse animated infinite" id='type'></span></h1>
     </section>
     <div id='players' data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated; if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated">
     </div>
@@ -45,7 +45,10 @@
         </div>
     </div>
 
-    <div class="cat body bodySlant earsBasic">
+    <div class="cat_container">
+    </div>
+
+    <div style="display: none" class="cat body bodySlant earsBasic">
       <div class="face"></div>
       <div class="features"></div>
     </div>

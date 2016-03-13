@@ -2,10 +2,20 @@
 var playUrl = "";
 var roomIsCreated = false;
 var playerModel;
+var catModel;
 var language;
 var aniJSCanvasNotifier;
 var playerContainer;
 var receivedWordCount;
+
+var catColors = [
+    "#e6ac4c",
+    "#CF7434",
+    "#9243E0",
+    "#EB214D",
+    "#5AEB21",
+    "#4221EB"
+];
 
 function createRoom() {
     'use strict';
@@ -106,16 +116,24 @@ function guid() {
 function setPlayerCount(count)
 {
     console.log('setPlayerCount', count);
-    var container = playerContainer;
+    var player_container = playerContainer;
+    var cat_container = $(".cat_container");
     var currentCount = playerContainer.children().size();
 
     if(currentCount < count)
     {
         for(var i=0; i<count - currentCount; i++)
         {
-            var element = playerModel.clone();
-            container.append(element);
-            element.show();
+            var player_element = playerModel.clone();
+            player_container.append(player_element);
+
+            var cat_element = catModel.clone();
+            var new_pos = parseInt( cat_container.children().last().css("left") ) + 130;
+            cat_element.css( "left", new_pos );
+            cat_element.show();
+            cat_element.css("background-color", catColors[ Math.floor( Math.random() * catColors.length ) ]);
+            cat_container.append(cat_element);
+
         }
     }
     else if(currentCount > count)
@@ -150,6 +168,9 @@ function fillPlayersData(results)
 $(function(){
     playerModel = $('#playerModel');
     playerModel.hide();
+
+    catModel = $('.cat');
+    catModel.hide();
 
     AniJS.run();
     //Obtaining the Notifier
