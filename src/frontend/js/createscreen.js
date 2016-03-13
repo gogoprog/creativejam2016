@@ -31,6 +31,8 @@ function createRoom() {
         $('.playerWordPosition').text('?');
 
         receivedWordCount = 0;
+        playerContainer.children().removeClass("ready");
+
     });
 
     socket.on('players', function(count){
@@ -40,6 +42,10 @@ function createRoom() {
     socket.on('playerName', function(data){
         console.log('playerName', data);
         $('.playerName').eq(data.index).text(data.name);
+    });
+
+    socket.on('playerReady', function(data) {
+        playerContainer.children().eq(data).addClass("ready");
     });
 
     socket.on('playerWord', function(data){
@@ -128,7 +134,9 @@ function fillPlayersData(results)
     playerContainer.children().each(function(index){
         console.log(index);
         console.log($(this));
-        words.eq(index).text($(this).data('word'));
+        if ($(this).data('word')) {
+            words.eq(index).text($(this).data('word'));
+        }
     });
 }
 

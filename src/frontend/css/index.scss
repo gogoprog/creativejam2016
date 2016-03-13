@@ -7,6 +7,10 @@ body{
     width: 30%;
     margin:5px;
     display:inline-block;
+
+    &.ready {
+        background-color: #2ABB9B;
+    }
 }
 
 .drop-shadow {
@@ -18,7 +22,6 @@ body{
     font-weight: bold;
     display: inline-block;
 }
-
 
 .footer {
     position: fixed;

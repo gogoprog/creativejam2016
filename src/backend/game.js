@@ -107,6 +107,8 @@ class Game {
                 socket.ready = true;
                 console.log('User is ready', name || socket.name);
 
+                that.mainScreenEmit('playerReady', socket.index);
+
                 if(name !== undefined)
                 {
                     socket.name = name;
