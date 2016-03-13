@@ -27,21 +27,21 @@
     </section>
     <div class="row">
         <div data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated, after: moveCanvas; if: showCustom, on: $CanvasCustom, do: zoomin animated" class="canvas-container col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
-            <canvas id="qrcode-region"></canvas>
+            <canvas class="drop-shadow" id="qrcode-region"></canvas>
         </div>
     </div>
     <section id="gameSection">
         <h1><span class="label label-default" id="word">?</span></h1>
         <h1>Search for a: <span id='type'></span></h1>
-        <div id='players'>
-        </div>
     </section>
+    <div id='players' data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated; if: showCustom, on: $CanvasCustom, do: zoomin animated">
+    </div>
     <div class="text-center">
-        <div id="playerModel" class="panel panel-default">
-            <h3><span class="label label-primary playerName">?</span></h3>
-            <h3><span class="label label-info totalScore">?</span></h3>
-            <h3><span class="label label-warning playerWord">?</span></h3>
-            <h3><span class="label label-warning playerWordPosition">?</span></h3>
+        <div id="playerModel" class="panel panel-default drop-shadow">
+            <h3><span class="label label-primary playerName">New Player!</span></h3>
+            <h3><span class="label label-info totalScore">0</span></h3>
+            <h3><span class="label label-warning playerWord">...</span></h3>
+            <h3><span class="label label-warning playerWordPosition">...</span></h3>
         </div>
     </div>
 
