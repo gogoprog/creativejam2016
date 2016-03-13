@@ -57,6 +57,8 @@ function createRoom() {
 
     var qrcodedraw = new QRCodeLib.QRCodeDraw();
 
+    $("#qrcode-region").show();
+
     playUrl = document.location.origin + "/play.html?name=" + room_name;
     console.log(playUrl);
     roomIsCreated = true;
@@ -150,6 +152,6 @@ $(function(){
         $("#createSection").hide();
         aniJSCanvasNotifier.dispatchEvent('showCustom');
     };
-
+    $("#qrcode-region").hide();
     playerContainer = $('#players');
 });
