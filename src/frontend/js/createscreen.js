@@ -22,7 +22,6 @@ function createRoom() {
         // move the qr code.
         aniJSCanvasNotifier.dispatchEvent('hideCustom');
 
-        $("#gameSection").show();
 
         $('#word').text(word.word);
         $('#type').text(word.type);
@@ -152,6 +151,7 @@ $(function(){
         qrcode.width( qrcode.width() / 2 );
         qrcode.height( qrcode.height() / 2 );
         $("#createSection").hide();
+        $("#gameSection").show();
         aniJSCanvasNotifier.dispatchEvent('showCustom');
     };
     $("#qrcode-region").hide();

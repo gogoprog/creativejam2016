@@ -26,15 +26,15 @@
         </div>
     </section>
     <div class="row">
-        <div data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated, after: moveCanvas; if: showCustom, on: $CanvasCustom, do: zoomin animated" class="canvas-container col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+        <div data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated, after: moveCanvas; if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated" class="canvas-container col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
             <canvas class="drop-shadow" id="qrcode-region"></canvas>
         </div>
     </div>
-    <section id="gameSection">
+    <section id="gameSection" data-anijs=" if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated">
         <h1><span class="label label-default" id="word">?</span></h1>
         <h1>Search for a: <span class="pulse animated infinite" id='type'></span></h1>
     </section>
-    <div id='players' data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated; if: showCustom, on: $CanvasCustom, do: zoomin animated">
+    <div id='players' data-anijs="if: hideCustom, on: $CanvasCustom, do: zoomout animated; if: showCustom, on: $CanvasCustom, do: lightSpeedIn animated">
     </div>
     <div class="text-center">
         <div id="playerModel" class="panel panel-default drop-shadow">
