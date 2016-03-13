@@ -214,7 +214,7 @@ class Game {
         Logic.setCorrectWords(this.correctWords);
         for(let p in this.players)
         {
-            let score = Logic.calculateStringScore(this.players[p].word) * this.players[p].multiplier;
+            let score = Math.floor(Logic.calculateStringScore(this.players[p].word) * this.players[p].multiplier);
             scores.push(score);
 
             if(score > bestScore)
