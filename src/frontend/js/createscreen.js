@@ -10,6 +10,7 @@ var receivedWordCount;
 function createRoom() {
     'use strict';
 
+    $('#generateSection').hide();
     let room_name = guid();
 
     let socket = io();
