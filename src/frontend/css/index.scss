@@ -18,13 +18,12 @@ body{
     border-radius: 10px;
 }
 
-#type {
+#type,
+#word {
     font-weight: bold;
     display: inline-block;
 }
 
-<<<<<<< HEAD
-=======
 .header {
     position: fixed;
     top: 0;
@@ -33,7 +32,6 @@ body{
     font-size:40px;
 }
 
->>>>>>> cc03c3cdcc078b522c9c9618b0f548a0b911649c
 .footer {
     position: fixed;
     bottom: 1%;
