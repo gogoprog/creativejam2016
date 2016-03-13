@@ -4,6 +4,7 @@ var roomIsCreated = false;
 var playerModel;
 var language;
 var playerContainer;
+var receivedWordCount;
 
 function createRoom() {
     'use strict';
@@ -22,6 +23,9 @@ function createRoom() {
 
         playerContainer.children().data('word', '');
         $('.playerWord').text('?');
+        $('.playerWordPosition').text('?');
+
+        receivedWordCount = 0;
     });
 
     socket.on('players', function(count){
@@ -36,6 +40,7 @@ function createRoom() {
     socket.on('playerWord', function(data){
         console.log('playerWord', data);
         playerContainer.children().eq(data.index).data('word', data.word);
+        $('.playerWordPosition').eq(data.index).text(++receivedWordCount);
     });
 
     socket.on('results', function(results){
