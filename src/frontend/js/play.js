@@ -56,6 +56,7 @@ $( document ).ready(function() {
             el = $('#lose');
         }
 
+        el.removeClass();
         el.show();
         el.addClass('zoomInDown');
         el.addClass('animated');
