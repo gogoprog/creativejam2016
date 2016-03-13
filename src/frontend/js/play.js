@@ -27,6 +27,9 @@ $( document ).ready(function() {
         mainForm.show();
         $("input[type=text]", mainForm ).val("");
         readyContainer.hide();
+
+        $('#win').hide();
+        $('#lose').hide();
     });
 
     socket.on('result', function(result){
@@ -43,17 +46,28 @@ $( document ).ready(function() {
 
         waitingForOtherPlayers.hide();
 
+        var el;
         if ( result.win ) {
-            background.css("background-color", "green");
+            //background.css("background-color", "green");
+            el = $('#win');
+
         } else {
-            background.css("background-color", "red");
+            //background.css("background-color", "red");
+            el = $('#lose');
         }
+
+        el.show();
+        el.addClass('zoomInDown');
+        el.addClass('animated');
 
         mainForm.hide();
 
         $("#score").text( result.score );
         // show results ( + win if you won ) and ready button. flow repeats.
     });
+
+    $('#win').hide();
+    $('#lose').hide();
 });
 
 function submitAnswer()
@@ -81,8 +95,4 @@ function onReady()
     } else {
         socket.emit('ready');
     }
-
-    background.css("background-color", "transparent");
-
-
 }
