@@ -125,6 +125,8 @@ function setPlayerCount(count)
         for(var i=0; i<count - currentCount; i++)
         {
             var player_element = playerModel.clone();
+            player_element.css("display", "inline-block");
+
             player_container.append(player_element);
 
             var cat_element = catModel.clone();
@@ -188,9 +190,11 @@ $(function(){
         qrcode.height( qrcode.height() / 2 );
         $("#createSection").hide();
         $("#gameSection").show();
+        playerContainer.show();
         aniJSCanvasNotifier.dispatchEvent('showCustom');
     };
     $("#qrcode-region").hide();
     $("#gameSection").hide();
     playerContainer = $('#players');
+    playerContainer.hide();
 });
