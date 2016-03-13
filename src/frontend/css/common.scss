@@ -207,3 +207,12 @@ $defaultBodyColor: #e6ac4c;
 				1px 18px transparent;
 	}
 }
+
+
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

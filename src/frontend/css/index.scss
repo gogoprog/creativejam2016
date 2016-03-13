@@ -19,6 +19,13 @@ body{
     display: inline-block;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+    width:100%;
+    text-align:left;
+    font-size:40px;
+}
 
 .footer {
     position: fixed;
