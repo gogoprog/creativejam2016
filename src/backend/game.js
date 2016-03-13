@@ -141,6 +141,7 @@ class Game {
     {
         console.log('Start');
         this.firstWord = false;
+        this.currentWordIndex = 0;
         let w = words[this.Language];
         this.currentWord = w[Math.floor(Math.random()*w.length)];
         console.log("Current word: " + this.currentWord );
@@ -150,6 +151,7 @@ class Game {
             this.players[p].word = '';
             this.players[p].playing = true;
         }
+
         var that = this;
         wordData.getWordData(this.currentWord, this.Language, function(data) {
             let type = "synonym";
@@ -174,8 +176,10 @@ class Game {
 
     onWord(socket, word)
     {
+        ++this.currentWordIndex;
         console.log(word, 'from', socket.name);
         socket.word = word;
+        socket.multiplier = 1.5 - (this.currentWordIndex * 0.1);
         this.mainScreenEmit('playerWord', {index:socket.index, word:word});
 
         this.checkReceivedWords();
@@ -210,7 +214,7 @@ class Game {
         Logic.setCorrectWords(this.correctWords);
         for(let p in this.players)
         {
-            let score = Logic.calculateStringScore(this.players[p].word);
+            let score = Logic.calculateStringScore(this.players[p].word) * this.players[p].multiplier;
             scores.push(score);
 
             if(score > bestScore)
