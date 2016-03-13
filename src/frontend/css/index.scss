@@ -1,7 +1,6 @@
 body{
     text-align: center;
     overflow:hidden;
-    translate: position;
 }
 
 #players > div {
@@ -13,4 +12,9 @@ body{
 .drop-shadow {
     box-shadow: 0 0px 20px #ffffff;
     border-radius: 10px;
+}
+
+#type {
+    font-weight: bold;
+    display: inline-block;
 }
