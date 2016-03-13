@@ -60,6 +60,7 @@ class Game {
 
         socket.index = this.players.length - 1;
         socket.totalScore = 0;
+        socket.multiplier = 1;
         socket.ready = false;
 
         let that = this;
