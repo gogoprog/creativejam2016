@@ -13,6 +13,18 @@ body{
     }
 }
 
+#players {
+    position: fixed;
+    top: 50%;
+    width:100%;
+    display:block;
+    z-index:0;
+}
+
+.canvasHolder {
+    z-index:1;
+}
+
 .drop-shadow {
     box-shadow: 0 0px 20px #ffffff;
     border-radius: 10px;

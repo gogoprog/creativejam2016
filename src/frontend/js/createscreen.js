@@ -18,10 +18,16 @@ function createRoom() {
         console.log('join: ' + msg);
     });
 
+    var first = true;
     socket.on('start', function(word){
-        // move the qr code.
-        aniJSCanvasNotifier.dispatchEvent('hideCustom');
 
+        if(first)
+        {
+            // move the qr code.
+            aniJSCanvasNotifier.dispatchEvent('hideCustom');
+            $('.canvasHolder').removeClass('centered');
+            first = false;
+        }
 
         $('#word').text(word.word);
         $('#type').text(word.type);
