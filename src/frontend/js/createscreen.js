@@ -60,7 +60,7 @@ function createRoom() {
     playUrl = document.location.origin + "/play.html?name=" + room_name;
     console.log(playUrl);
     roomIsCreated = true;
-    qrcodedraw.scale = 4;
+    qrcodedraw.scale = 8;
     qrcodedraw.draw(document.getElementById('qrcode-region'), playUrl, function(error,canvas){
       if(error){
          return console.log('Error: ',error);
