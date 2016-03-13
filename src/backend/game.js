@@ -85,15 +85,20 @@ class Game {
             var index = that.players.indexOf(socket);
             if(index != -1)
             {
+                console.log('User left', socket.name || '?');
+
                 that.players.splice(index, 1);
-                that.state = State.WAITING_FOR_PLAYERS;
+
                 for(var p in that.players)
                 {
                     that.players[p].index = p;
                 }
+
             }
 
             that.mainScreenEmit('players', that.players.length);
+
+            that.checkReceivedWords();
         });
 
         socket.on('ready', function(name){
@@ -137,8 +142,12 @@ class Game {
         let w = words[this.Language];
         this.currentWord = w[Math.floor(Math.random()*w.length)];
         console.log("Current word: " + this.currentWord );
-        this.playerWords = Array(this.players.length);
-        for(var p in this.players) this.playerWords[p] = '';
+
+        for(var p in this.players)
+        {
+            this.players[p].word = '';
+            this.players[p].playing = true;
+        }
         var that = this;
         wordData.getWordData(this.currentWord, this.Language, function(data) {
             let type = "synonym";
@@ -163,13 +172,18 @@ class Game {
 
     onWord(socket, word)
     {
-        console.log(word, 'from', socket.index);
-        this.playerWords[socket.index] = word;
+        console.log(word, 'from', socket.name);
+        socket.word = word;
 
+        this.checkReceivedWords();
+    }
+
+    checkReceivedWords()
+    {
         let completed = true;
-        for(var p in this.playerWords)
+        for(var p in this.players)
         {
-            if(this.playerWords[p] === '')
+            if(this.players[p].playing && this.players[p].word === '')
             {
                 completed = false;
                 break;
@@ -193,7 +207,7 @@ class Game {
         Logic.setCorrectWords(this.correctWords);
         for(let p in this.players)
         {
-            let score = Logic.calculateStringScore(this.playerWords[p]);
+            let score = Logic.calculateStringScore(this.players[p].word);
             scores.push(score);
 
             if(score > bestScore)
@@ -228,6 +242,7 @@ class Game {
         this.mainScreenEmit('results', allResults);
 
         this.state = State.WAITING_FOR_PLAYERS;
+        console.log('WAITING_FOR_PLAYERS');
     }
 }
 
