@@ -41,6 +41,10 @@ body{
 .drop-shadow {
     box-shadow: 0 0px 20px #ffffff;
     border-radius: 10px;
+
+    &.winner {
+        box-shadow: 0 0px 20px #2ABB9B;
+    }
 }
 
 #type,

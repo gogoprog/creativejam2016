@@ -149,13 +149,20 @@ function fillPlayersData(results)
 {
     var totalScores = $('.totalScore');
     var words = $('.playerWord');
+    var maxScore = 0;
+    var winner = -1;
 
     for(var r in results)
     {
         var result = results[r];
+        if ( result.totalScore > maxScore ) {
+            maxScore = result.totalScore;
+            winner = r;
+        }
         totalScores.eq(r).text(result.totalScore);
     }
 
+    playerContainer.children().removeClass("winner").eq(winner).addClass("winner");
     playerContainer.children().each(function(index){
         console.log(index);
         console.log($(this));
