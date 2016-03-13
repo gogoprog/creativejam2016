@@ -174,6 +174,7 @@ class Game {
     {
         console.log(word, 'from', socket.name);
         socket.word = word;
+        this.mainScreenEmit('playerWord', {index:socket.index, word:word});
 
         this.checkReceivedWords();
     }

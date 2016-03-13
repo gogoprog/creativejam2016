@@ -3,6 +3,7 @@ var playUrl = "";
 var roomIsCreated = false;
 var playerModel;
 var language;
+var playerContainer;
 
 function createRoom() {
     'use strict';
@@ -18,6 +19,9 @@ function createRoom() {
     socket.on('start', function(word){
         $('#word').text(word.word);
         $('#type').text(word.type);
+
+        playerContainer.children().data('word', '');
+        $('.playerWord').text('?');
     });
 
     socket.on('players', function(count){
@@ -25,13 +29,17 @@ function createRoom() {
     });
 
     socket.on('playerName', function(data){
-        console.log(data);
+        console.log('playerName', data);
         $('.playerName').eq(data.index).text(data.name);
+    });
+
+    socket.on('playerWord', function(data){
+        console.log('playerWord', data);
+        playerContainer.children().eq(data.index).data('word', data.word);
     });
 
     socket.on('results', function(results){
         console.log('results');
-        console.log(results);
         fillPlayersData(results);
     });
 
@@ -43,7 +51,7 @@ function createRoom() {
     playUrl = document.location.origin + "/play.html?name=" + room_name;
     console.log(playUrl);
     roomIsCreated = true;
-    qrcodedraw.scale = 8;
+    qrcodedraw.scale = 4;
     qrcodedraw.draw(document.getElementById('qrcode-region'), playUrl, function(error,canvas){
       if(error){
          return console.log('Error: ',error);
@@ -73,8 +81,8 @@ function guid() {
 function setPlayerCount(count)
 {
     console.log('setPlayerCount', count);
-    var container = $('#players');
-    var currentCount = container.children().size();
+    var container = playerContainer;
+    var currentCount = playerContainer.children().size();
 
     if(currentCount < count)
     {
@@ -97,15 +105,23 @@ function setPlayerCount(count)
 function fillPlayersData(results)
 {
     var totalScores = $('.totalScore');
+    var words = $('.playerWord');
 
     for(var r in results)
     {
         var result = results[r];
         totalScores.eq(r).text(result.totalScore);
     }
+
+    playerContainer.children().each(function(index){
+        console.log(index);
+        console.log($(this));
+        words.eq(index).text($(this).data('word'));
+    });
 }
 
 $(function(){
     playerModel = $('#playerModel');
     playerModel.hide();
+    playerContainer = $('#players');
 });
