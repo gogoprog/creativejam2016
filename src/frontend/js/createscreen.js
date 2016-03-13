@@ -3,6 +3,7 @@ var playUrl = "";
 var roomIsCreated = false;
 var playerModel;
 var language;
+var aniJSCanvasNotifier;
 
 function createRoom() {
     'use strict';
@@ -16,6 +17,9 @@ function createRoom() {
     });
 
     socket.on('start', function(word){
+        // move the qr code.
+        aniJSCanvasNotifier.dispatchEvent('hideCustom');
+
         $('#word').text(word.word);
         $('#type').text(word.type);
     });
@@ -108,4 +112,23 @@ function fillPlayersData(results)
 $(function(){
     playerModel = $('#playerModel');
     playerModel.hide();
+
+    AniJS.run();
+    //Obtaining the Notifier
+    aniJSCanvasNotifier = AniJS.getNotifier('CanvasCustom');
+
+    //Obtaining the default helper
+    var animationHelper = AniJS.getHelper();
+
+    //Defining afterAnimationFunction
+    animationHelper.moveCanvas = function(e, animationContext){
+        console.log(e);
+
+        var qrcode = $("#qrcode-region");
+        qrcode.width( qrcode.width() / 2 );
+        qrcode.height( qrcode.height() / 2 );
+        $("#createSection").hide();
+        aniJSCanvasNotifier.dispatchEvent('showCustom');
+    };
+
 });
